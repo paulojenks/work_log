@@ -3,6 +3,8 @@ import sys
 import re
 import csv
 
+from Errors import InputError
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -21,27 +23,35 @@ class Search:
 
     def search_menu(self):
         """ Search Menu Options """
-        clear_screen()
         choice_prompt = "How would you like to search:\n"
         choice_prompt += "(D)ate\n"
         choice_prompt += "(M)inutes\n"
         choice_prompt += "(K)eyword\n"
         choice_prompt += "(P)attern\n"
         choice_prompt += "(E)xit to main menu\n"
-        print(choice_prompt)
-        choice = input(">>").lower()
-        if choice == 'd':
-            self.date_search()
-        elif choice == 'm':
-            self.minute_search()
-        elif choice == 'k':
-            self.keyword_search()
-        elif choice == 'p':
-            self.pattern_search()
-        elif choice == 'e':
-            return 0
-        else:
-            print("Sorry, I didn't get that.")
+        choices = ['d', 'm', 'k', 'p', 'e']
+        while True:
+            try:
+                print(choice_prompt)
+                choice = input(">>").lower()
+                if choice not in choices:
+                    raise InputError
+            except InputError:
+                if choice not in choices:
+                    clear_screen()
+                    print("Sorry, I didn't get that.")
+            else:
+                if choice == 'd':
+                    self.date_search()
+                elif choice == 'm':
+                    self.minute_search()
+                elif choice == 'k':
+                    self.keyword_search()
+                elif choice == 'p':
+                    self.pattern_search()
+                elif choice == 'e':
+                    break
+
 
     def date_search(self):
         """ Searches log for DATE search terms given """

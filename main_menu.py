@@ -3,6 +3,7 @@ import sys
 
 from log import Log
 from search import Search
+from Errors import InputError
 
 
 def clear_screen():
@@ -18,11 +19,14 @@ class WorkLog:
         prompt += '- (E)ntry\n'
         prompt += '- (S)earch\n'
         prompt += '- (Q)uit\n'
+        choices = ['e', 's', 'q']
         while True:
             try:
                 print(prompt)
                 choice = input('>').lower()
-            except ValueError:
+                if choice not in choices:
+                    raise InputError
+            except InputError:
                 print("Invalid response!")
             else:
                 if choice == 'e':
