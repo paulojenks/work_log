@@ -7,11 +7,16 @@ from Errors import InputError
 
 
 def clear_screen():
+    """ Clears the Screen """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 
 class Log:
+    """ Log Tasks
+        Each task requires name, notes and length( in minutes)
+        Date is automatically set as today's date
+    """
     def __init__(self):
         self.log()
 

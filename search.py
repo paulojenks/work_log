@@ -22,7 +22,13 @@ class Search:
 
 
     def search_menu(self):
-        """ Search Menu Options """
+        """ Search Menu Options
+        enter 'd' for search by date
+        enter 'm' for search by minutes
+        enter 'k' for search by keyword
+        enter 'p' for search by pattern
+        enter 'e' to exit the search menu
+        """
         choice_prompt = "How would you like to search:\n"
         choice_prompt += "(D)ate\n"
         choice_prompt += "(M)inutes\n"
